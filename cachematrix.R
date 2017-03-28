@@ -1,9 +1,9 @@
-## The following functions are used for caching the inverse of a matrix as it
-## seems to be an expensive task.
+## The functions below are used for calculate and cache the inverse of a matrix 
+## as it seems to be an expensive task.
 
-## Returns a list containing some functions responsible for creating and 
-## retrieving original and cached versions of the matrix.
-
+## This function receives one argument that is a conventional and invertable
+## matrix (x) and returns a list containing functions responsible for 
+## creating and retrieving original and cached versions of the matrix.
 makeCacheMatrix <- function(x = matrix()) {
     inverseMatrix <- NULL
     set <- function(y) {
@@ -17,9 +17,10 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Returns the inverse matrix from the cache (if defined) or the computed 
-## version.
-
+## This function receives one argument that is the object created by the 
+## makeCacheMatrix function and extra arguments that can be used in solve 
+## function and returns the inverse matrix from the cache (if defined) or 
+## computes, caches and returns the computated version.
 cacheSolve <- function(x, ...) {
     inverseMatrix <- x$getInverse()
     
@@ -29,7 +30,7 @@ cacheSolve <- function(x, ...) {
     }
     
     originalMatrix <- x$get()
-    inverseMatrix <- solve(originalMatrix)
+    inverseMatrix <- solve(originalMatrix, ...)
     x$setInverse(inverseMatrix)
     
     inverseMatrix
